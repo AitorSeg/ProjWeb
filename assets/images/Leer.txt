@@ -1,0 +1,2 @@
+En esta carpeta estarán las imágenes que se utilizarán en la página web.
+Por ejemplo, el logo
