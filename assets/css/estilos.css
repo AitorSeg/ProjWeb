@@ -36,6 +36,7 @@
     --font-secondary: 'Nunito', sans-serif;
 }
 
+/* RESET */
 * {
   margin: 0;
   padding: 0;
@@ -95,6 +96,9 @@ h2 {
   background-color: var(--color-fondo-header);
   padding: 2rem;
   height: 150px;
+  position: sticky;
+  top: 0;
+  z-index: 1000;
 }
 
 .topbar .container {
@@ -107,6 +111,11 @@ h2 {
 
 .topbar .logo {
   height: 103px;
+  transition: transform 0.3s ease;
+}
+
+.topbar .logo:hover {
+  transform: scale(1.05);
 }
 
 .topbar .auth-buttons {
@@ -114,8 +123,76 @@ h2 {
   gap: 1rem;
 }
 
+/* BIENVENIDA DESPLEGABLE */
+#bienvenida-container {
+  position: relative;
+  font-family: var(--font-primary);
+  font-size: 20px;
+  color: var(--color-oscuro);
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  cursor: pointer;
+  position: absolute;
+  bottom: 10px;
+  right: 2rem;
+  z-index: 1001;
+}
+
+#bienvenida-container img {
+  width: 16px;
+  height: 16px;
+  transition: transform 0.3s ease;
+
+}
+
+#bienvenida-container:hover img {
+  transform: rotate(180deg);
+}
+
+#bienvenida-menu {
+  opacity: 0;
+  transform: translateY(-2px);
+  transition: opacity 0.3s ease, transform 0.3s ease;
+  position: absolute;
+  top: 80%;
+  right: 0;
+  background-color: white;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+  border-radius: 8px;
+  overflow: hidden;
+  min-width: 150px;
+  font-size: 14px;
+  pointer-events: none;
+  z-index: 1000;
+  visibility: hidden;  
+}
+
+#bienvenida-container:hover #bienvenida-menu,
+#bienvenida-menu:hover {
+  opacity: 1;
+  transform: translateY(0);
+  pointer-events: auto;
+  visibility: visible;
+}
+
+#bienvenida-menu a {
+  display: block;
+  padding: 0.75rem 1rem;
+  color: var(--color-oscuro);
+  text-decoration: none;
+  transition: background-color 0.2s ease;
+}
+
+#bienvenida-menu a:hover {
+  background-color: var(--color-hover-grisaceo);
+}
+
 /* SUBHEADER */
 .subheader {
+  position: sticky;
+  top: 150px;
+  z-index: 999;
   background-color: var(--color-principal);
 }
 
@@ -214,6 +291,7 @@ h2 {
   border-radius: 8px;
 }
 
+/* SECCIONES GENERALES */	
 .section {
   padding: 4rem 1.5rem;
   max-width: 1200px;
@@ -233,7 +311,7 @@ h2 {
   height: 4px;
   background-color: var(--color-principal);
   border-radius: 999px;
-  margin: 4rem auto;
+  margin: 4rem auto 0;
 }
 
 .section-inner {
@@ -242,6 +320,11 @@ h2 {
   padding: 0 1rem;
 }
 
+.section:last-child {
+  margin-bottom: 0;
+}
+
+/* SOBRE NOSOTROS */
 .nosotros-content {
   display: flex;
   flex-wrap: wrap;
@@ -268,6 +351,21 @@ h2 {
   margin-bottom: 1rem;
 }
 
+.social-icons {
+  text-align: center;
+  margin-top: 1rem;
+}
+
+.social-icons a {
+  margin: 0 0.5rem;
+  display: inline-block;
+  transition: transform 0.2s ease;
+}
+
+.social-icons a:hover {
+  transform: scale(1.2);
+}
+
 .social-icon {
   width: 28px;
   height: 28px;
@@ -276,9 +374,10 @@ h2 {
 }
 
 .social-icon:hover {
-  transform: scale(1.2);
+  transform: scale(1.2) translateY(-2px);
 }
 
+/* MÓDULO ESTRELLA */
 .modulo-card {
   max-width: 750px;
   margin: 0 auto;
@@ -331,15 +430,6 @@ h2 {
   text-align: center;
 }
 
-.section:last-child {
-  margin-bottom: 0;
-}
-
-.section-divider {
-  margin-top: 3rem;
-  margin-bottom: 0;
-}
-
 .faq-item {
   margin-bottom: 1.5rem;
   border-bottom: 1px solid var(--color-gris-medio);
@@ -354,7 +444,7 @@ h2 {
   padding: 1rem;
   background-color: var(--color-gris-claro);
   border-radius: 8px;
-  transition: background-color 0.2s;
+  transition: background-color 0.2s ease;
 }
 
 .faq-question:hover {
@@ -377,57 +467,103 @@ h2 {
   margin-top: 0.5rem;
 }
 
-footer {
-  background-color: var(--color-gris-oscuro);
-  color: var(--color-principal);
+/* LOGIN */
+.login-container {
+  display: flex;
+  justify-content: center;
+  gap: 4rem;
+  flex-wrap: wrap;
+  max-width: 1200px;
+  margin: 3rem auto;
+  align-items: stretch;
+}
+
+.login-left,
+.login-right {
+  flex: 1 1 40%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
   padding: 2rem;
+}
+
+.login-left {
   text-align: center;
+}
+
+.login-left h2 {
+  font-size: 24px;
+  margin-top: 1rem;
+}
+
+.login-left .logo {
+  height: 60px;
+  width: auto;
+  border-radius: 8px;
+  display: block;
+  margin: 0 auto;
+}
+
+.icono-login {
+  width: 100px;
+  margin-top: 2rem;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.login-right h2 {
+  font-size: 24px;
+  margin-bottom: 0.5rem;
+}
+
+.login-right p {
+  margin-bottom: 1.5rem;
   font-size: 14px;
 }
 
-a:hover,
-button:hover,
-.faq-question:hover,
-.card:hover,
-.btn:hover,
-.btn-outline:hover,
-.social-icon:hover {
-  transform: translateY(-2px);
-  transition: transform 0.2s ease, background-color 0.2s ease;
+.login-right p a {
+  color: var(--color-principal);
+  text-decoration: underline;
+  font-weight: 600;
 }
 
-.card {
-  background: white;
-  border-radius: 12px;
-  padding: 1.5rem;
-  box-shadow: 0 2px 8px rgba(0,0,0,0.05);
-  transition: transform 0.2s ease, box-shadow 0.2s ease;
+.input-group {
+  margin-bottom: 1.5rem;
 }
 
-.card:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.06);
+.input-group label {
+  display: block;
+  font-weight: 600;
+  margin-bottom: 0.5rem;
 }
 
-html {
-  scroll-behavior: smooth;
+.input-group .required-field::after {
+  content: "*";
+  color: var(--color-principal);
+  margin-left: 4px;
 }
 
-.topbar .logo:hover {
-  transform: scale(1.05);
-  transition: transform 0.3s ease;
+.extra-links {
+  text-align: center;
+  margin-bottom: 1.5rem;
 }
 
-@media (max-width: 768px) {
-  h1 {
-    font-size: 28px;
-  }
-
-  h2 {
-    font-size: 24px;
-  }
+.extra-links a {
+  color: var(--color-principal);
+  text-decoration: underline;
+  font-weight: 500;
+  display: inline-block;
+  text-align: center;
+  width: 100%;
 }
 
+.login-right .btn {
+  display: block;
+  margin: 0 auto;
+}
+
+/* BOTONES */
 .btn, .btn-outline {
   font-family: var(--font-primary);
   padding: 0.5rem 1rem;
@@ -449,6 +585,7 @@ html {
   background-color: var(--color-hover-oscuro);
   border-color: var(--color-hover-grisaceo);
   color: var(--color-hover-principal);
+  transform: translateY(-2px);
 }
 
 .btn:active {
@@ -465,6 +602,7 @@ html {
 .btn-outline:hover {
   background: var(--color-hover-grisaceo);
   color: var(--color-contraste);
+  transform: translateY(-2px);
 }
 
 .btn-outline:active {
@@ -472,26 +610,84 @@ html {
   color: var(--color-contraste);
 }
 
-.icon {
-  width: 24px;
-  height: 24px;
-  stroke-width: 1.5;
+/* CARD */
+.card {
+  background: white;
+  border-radius: 12px;
+  padding: 1.5rem;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.06);
+}
+
+/* INPUTS */
+.input-field {
+  background-color: var(--color-gris-claro);
+  border: 1px solid var(--color-gris-medio);
+  border-radius: 8px;
+  padding: 0.75rem 1rem;
+  font-family: var(--font-secondary);
+  font-size: 16px;
+  width: 100%;
+}
+
+.input-field:focus {
+  outline: none;
+  border-color: var(--color-principal);
+  box-shadow: 0 0 0 2px var(--color-principal);
+}
+
+/* INPUTS CON ERROR */
+.input-field.error {
+  background-color: var(--color-campo-error);
+  border: 1px solid var(--color-trazo-error);
+}
+
+.input-error-message {
+  color: var(--color-texto-error);
+  font-size: 14px;
+  margin-top: 0.25rem;
+}
+
+/* SMOOTH SCROLL */
+html {
+  scroll-behavior: smooth;
+}
+
+footer {
+  background-color: var(--color-gris-oscuro);
   color: var(--color-principal);
-  vertical-align: middle;
-}
-
-.social-icons {
+  padding: 2rem;
   text-align: center;
-  margin-top: 1rem;
+  font-size: 14px;
 }
 
-.social-icons a {
-  margin: 0 0.5rem;
-  display: inline-block;
-  transition: transform 0.2s ease;
+footer a {
+  color: var(--color-principal);
 }
 
-.social-icons a:hover {
-  transform: scale(1.2);
+footer p {
+  margin-top: 1.5rem;;
 }
 
+@media (max-width: 768px) {
+  h1 {
+    font-size: 28px;
+  }
+
+  h2 {
+    font-size: 24px;
+  }
+
+  .hero-content {
+    flex-wrap: wrap;
+  }
+
+  .login-container {
+    flex-direction: column;
+  }
+}
