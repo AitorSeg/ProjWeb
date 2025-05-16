@@ -24,9 +24,19 @@
       <a href="index.html">
         <img src="assets/images/logoGTImenta.png" alt="Logo GTI" class="logo" />
       </a>
-      <div class="auth-buttons">
-        <a href="#" class="btn">Iniciar sesión</a>
+
+      <div id="auth-buttons">
+        <a href="login.html" class="btn">Iniciar sesión</a>
         <a href="#" class="btn-outline">Registrarse</a>
+      </div>
+
+      <div id="bienvenida-container" style="display: none;">
+        <span id="bienvenida"></span>
+        <img src="assets/images/flechita.png" alt="Desplegar menú" />
+        <div id="bienvenida-menu">
+          <a href="#">Mi Perfil</a>
+          <a href="#" id="cerrar-sesion">Cerrar Sesión</a>
+        </div>
       </div>
     </div>
   </header>
@@ -86,6 +96,8 @@
       </div>
     </div>
   </section>
+
+  <div class="section-divider"></div>
 
   <!-- MÓDULO ESTRELLA -->
   <section class="section section-light">
@@ -163,5 +175,27 @@
 
   <!-- JS -->
   <script src="assets/js/main.js"></script>
+
+  <script>
+    document.addEventListener("DOMContentLoaded", () => {
+      const nombreUsuario = localStorage.getItem("usuarioNombre");
+      const bienvenida = document.getElementById("bienvenida");
+      const bienvenidaContainer = document.getElementById("bienvenida-container");
+      const botones = document.getElementById("auth-buttons");
+
+      if (nombreUsuario) {
+        bienvenida.textContent = `Bienvenido, ${nombreUsuario}`;
+        bienvenidaContainer.style.display = "flex";
+        botones.style.display = "none";
+      }
+
+      const cerrarSesion = document.getElementById("cerrar-sesion");
+      cerrarSesion?.addEventListener("click", () => {
+        localStorage.removeItem("usuarioNombre");
+        location.reload();
+      });
+    });
+  </script>
+
 </body>
 </html>
